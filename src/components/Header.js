@@ -1,45 +1,33 @@
-import React, { useState } from 'react'
-import { Button, Container, Nav, Navbar, NavLink } from 'react-bootstrap'
-import Products from './Products'
-import Payment from './Payment'
+import React from "react";
+import { Button, Container, Nav, Navbar, NavLink } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function Header() {
-  const [selectedProducts, setSelectedProducts] = useState([])
-  const [showPayment, setShowPayment] = useState(false)
-
-  const selectedProductsCount = selectedProducts.length
-
+function Header(props) {
+  const { count } = props;
+  const navigate = useNavigate();
   const handlePayment = () => {
-    setShowPayment(true)
-  }
+    navigate("/payment");
+  };
 
   return (
     <>
       <Navbar bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">ShopEase</Navbar.Brand>
+          <Navbar.Brand href="/">ShopEase</Navbar.Brand>
           <Nav className="ml-auto">
             <NavLink>
-              <Button 
-                className='btn btn-light justify-content-end' 
+              <Button
+                className="btn btn-light justify-content-end"
                 onClick={handlePayment}
               >
-                Count: {selectedProductsCount}
+                Count: {count}
               </Button>
             </NavLink>
           </Nav>
         </Container>
       </Navbar>
-      {showPayment ? (
-        <Payment products={selectedProducts} total={selectedProducts.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)} />
-      ) : (
-        <Products
-          selectedProducts={selectedProducts}
-          setSelectedProducts={setSelectedProducts}
-        />
-      )}
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;
