@@ -1,0 +1,41 @@
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .product-card img {
+    display: block;
+    margin: 0 auto 10px;
+  }
+  
+  .quantity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .quantity-container button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .quantity-container button:hover {
+    background-color: #ddd;
+  }
+  
+  .grand-total {
+    margin-top: 20px;
+    text-align: right;
+  }
+  

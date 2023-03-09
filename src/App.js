@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Products from "./components/Products";
+import Payment from "./components/Payment";
+import { useState } from "react";
+import Thankyou from "./components/Thankyou";
 
 function App() {
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  let total = 0;
+  for (let i = 0; i < selectedProducts.length; i++) {
+    total += selectedProducts[i].price * selectedProducts[i].quantity;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header selectedProducts={selectedProducts}
+        setSelectedProducts={setSelectedProducts} />
+        <Routes>
+          <Route path="/" element={<Products />} selectedProducts={selectedProducts}
+        setSelectedProducts={setSelectedProducts} />
+          <Route path="/payment" element={<Payment products={selectedProducts} total={total} />} />
+          <Route path="/thankyou" element={<Thankyou />}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
